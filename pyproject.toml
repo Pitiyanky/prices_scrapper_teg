@@ -1,0 +1,113 @@
+# pyproject.toml
+
+[tool.poetry]
+name = "dashboard-app"
+version = "0.1.0"
+description = "Análisis de precios de productos con un dashboard interactivo."
+authors = ["Tu Nombre <tu.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "dashboard_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.10" # O la versión que uses. Ej: "^3.9", "^3.11"
+
+# --- Core de la Aplicación Web (Dashboard) ---
+dash = "^3.0.4"
+dash-bootstrap-components = "^2.0.3"
+dash-mantine-components = "^2.1.0"
+dash-iconify = "^0.1.2"
+# gunicorn = "^22.0.0" # Servidor WSGI para producción, descomentar si es necesario
+
+# --- Manipulación y Análisis de Datos ---
+pandas = "^2.2.3"
+numpy = "^1.26.4"
+scikit-learn = "^1.6.1"
+scipy = "^1.13.1"
+pyarrow = "^19.0.1"  # Para un rendimiento más rápido con Parquet y otros formatos
+openpyxl = "^3.1.5" # Para leer/escribir archivos Excel con Pandas
+
+# --- Modelos de Machine Learning y Time Series ---
+statsmodels = "^0.14.4"
+pmdarima = "^2.0.4"
+xgboost = "^3.0.2"
+lightgbm = "^4.6.0"
+darts = "^0.36.0"   # Librería para análisis de series de tiempo
+
+# --- Interpretabilidad de Modelos (XAI) ---
+shap = "^0.48.0"
+lime = "^0.2.0.1"
+eli5 = "^0.16.0"
+
+# --- Procesamiento de Lenguaje Natural (NLP) ---
+nltk = "^3.9.1"
+thefuzz = "^0.22.1"     # Para matching de strings difusos
+spacy = "^3.8.0"        # Framework principal de NLP
+# Modelo de Spacy para español, instalado desde una URL específica
+es-core-news-lg = {url = "https://github.com/explosion/spacy-models/releases/download/es_core_news_lg-3.8.0/es_core_news_lg-3.8.0-py3-none-any.whl"}
+tokenizers = "^0.21.2"
+gensim = "^4.3.3"
+
+# --- Deep Learning (Bibliotecas pesadas, asegúrate de necesitarlas) ---
+tensorflow = {version = "^2.19.0", optional = true}
+torch = {version = "^2.7.1", optional = true}
+keras = {version = "^3.10.0", optional = true}
+
+# --- Visualización (además de Plotly que viene con Dash) ---
+matplotlib = "^3.10.3"
+seaborn = "^0.13.2"
+yellowbrick = "^1.5" # Visualizaciones para scikit-learn
+
+# --- Web Scraping y Clientes API ---
+selenium = "^4.23.0"
+beautifulsoup4 = "^4.13.4"
+lxml = "^5.2.1"
+requests = "^2.32.3"
+fastapi = {version = "^0.115.8", optional = true} # Si también expones una API
+uvicorn = {version = "^0.34.0", optional = true}  # Servidor para FastAPI
+
+# --- Base de Datos ---
+psycopg2 = "^2.9.9"
+SQLAlchemy = "^2.0.43"
+
+
+# --- Utilidades Generales ---
+schedule = "^1.2.2"
+tqdm = "^4.67.1"     # Barras de progreso
+PyYAML = "^6.0.2"      # Para leer archivos de configuración .yaml
+dotenv = "^0.9.9"
+
+[tool.poetry.extras]
+# Permite instalar grupos opcionales, ej: poetry install --with deep-learning
+deep-learning = ["tensorflow", "torch", "keras"]
+api = ["fastapi", "uvicorn"]
+
+
+[tool.poetry.group.dev.dependencies]
+# Herramientas de formateo y linting
+black = "^24.4.2"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+pylint = "^3.2.2"
+# mypy = "^1.10.0" # Descomenta si quieres usar chequeo de tipos estático
+
+# --- Entorno de Notebook y Desarrollo Interactivo ---
+jupyterlab = "^4.4.3"
+ipykernel = "^6.29.5"
+ipywidgets = "^8.1.7"
+notebook = "^7.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+# --- Configuración de Herramientas ---
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
